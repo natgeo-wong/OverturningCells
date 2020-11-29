@@ -100,3 +100,35 @@ function zmeanpsivall(
     @save "$(dpath)/lat.jld2" lat
 
 end
+
+function zmeanucomp(
+    prjpath::AbstractString,
+    config::AbstractString
+)
+
+    @info "$(Dates.now()) - Beginning compilation of zonal-mean ZONAL WIND data at ALL PRESSURE LEVELS for CONFIG $(uppercase(config))..."
+    init,iroot = iscastartup(
+        prjpath=prjpath,config=config,
+        fname="atmos_daily",welcome=false
+    );  lat = init["lat"];
+
+    imod,ipar,itime = iscainitialize(init,modID="dpre",parID="ucomp");
+    nruns = itime["nruns"]-1; nlat = length(imod["lat"]); nlvls = length(imod["levels"]);
+    u_air = zeros(nlat,nlvls,360);
+
+    for irun = 1 : nruns
+        @info "$(Dates.now()) - Extracting ZONAL WIND data for RUN $irun of CONFIG $(uppercase(config)) ..."
+        ids,ivar = iscarawread(ipar,iroot,irun=irun+1);
+        u_air += dropdims(mean(ivar[:]*1,dims=1),dims=1)
+        close(ids)
+    end
+
+    u_air = dropdims(mean(u_air/nruns,dims=3),dims=3)
+    u_air = (u_air .+ reverse(u_air,dims=1))/2
+
+    @info "$(Dates.now()) - Saving compiled zonal-mean MERIDIONAL STREAMFUNCTION data at ALL PRESSURE LEVELS for CONFIG $(uppercase(config))..."
+    dpath = datadir("compiled/zmean-u_air-all/"); if !isdir(dpath); mkpath(dpath); end
+    @save "$(dpath)/$(config)-zmean-u_air-all.jld2" u_air
+    @save "$(dpath)/lat.jld2" lat
+
+end
