@@ -1,10 +1,37 @@
-# OverturningCells
+# **<div align="center">OverturningCells</div>**
 
-This code base is using the Julia Language and [DrWatson](https://juliadynamics.github.io/DrWatson.jl/stable/)
-to make a reproducible scientific project named
-> OverturningCells
+This repository contains the analysis scripts and output for the **Overturning Cells** project, written in Julia.  We aim to investigate how planetary rotation rates can affect the number of cells in the overturning circulation of a planet.
 
-It is authored by Nathanael Wong <natgeo.wong@outlook.com>.
+**Created/Mantained By:** Nathanael Wong (nathanaelwong@fas.harvard.edu)
+
+> Introductory Text Here.
+
+## Progress
+* [ ] Experimental Runs
+   * [x] Earth-sized planets, varying rotation rates (0.1-10x Earth Ω)
+   * [ ] Different-sized planet, if necessary
+
+* [ ] Analysis
+   * [ ] A basic analysis on the mean meridional overturning circulation
+   * [ ] Derive a basic pattern for number of cells, and rotation rate, if any
+
+## 0. Motivation
+
+Text
+
+## 1. Methodology
+
+### A. Isca Model
+
+Text
+
+### B. Mean Meridional Overturning Circulation
+
+Text
+
+## 2. Results
+
+## Installation
 
 To (locally) reproduce this project, do the following:
 
@@ -12,10 +39,17 @@ To (locally) reproduce this project, do the following:
    git-history and may need to be downloaded independently.
 1. Open a Julia console and do:
    ```
-   julia> using Pkg
-   julia> Pkg.activate("path/to/this/project")
-   julia> Pkg.instantiate()
+   julia> ] activate .
+    Activating environment at `~/Projects/OverturningCells/Project.toml`
+
+   (OverturningCells) pkg> instantiate
+   (OverturningCells) pkg> add IscaTools#master
    ```
 
 This will install all necessary packages for you to be able to run the scripts and
 everything should work out of the box.
+
+*(Note: You need to install the #master versions of IscaTools.jl as of now.)*
+
+## **Other Acknowledgements**
+> Project Repository Template generated using [DrWatson.jl](https://github.com/JuliaDynamics/DrWatson.jl) created by George Datseris.
