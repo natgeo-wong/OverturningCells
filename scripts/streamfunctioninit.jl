@@ -1,7 +1,6 @@
 using DrWatson
 @quickactivate "OverturningCells"
 
-global_logger(ConsoleLogger(stdout,Logging.Info))
 include(srcdir("isca.jl"))
 
 prj = "/n/holyscratch01/kuang_lab/nwong/OverturningCells/data"

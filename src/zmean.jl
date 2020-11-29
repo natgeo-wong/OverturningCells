@@ -1,6 +1,8 @@
+using ClimateERA
+using Dates
 using JLD2
 using IscaTools
-using ClimateERA
+using Logging
 
 function zmeantair(
     prjpath::AbstractString,
@@ -46,7 +48,7 @@ function zmeanpsiv500(
     );  lat = init["lat"];
 
     imod,ipar,itime = iscainitialize(init,modID="cpre",parID="psi_v",pressure=500e2);
-    nruns = itime["nruns"]-1; nlat = length(imod["lat"]); psiv = zeros(nlat,360,nruns);
+    nruns = itime["nruns"]-1; nlat = length(imod["lat"]); psiv = zeros(nlat,360);
     lvl = ipar["level"]
 
     for irun = 1 : nruns
