@@ -60,4 +60,3 @@ exp.set_resolution(*RESOLUTION)
 #Lets do a run!
 if __name__=="__main__":
     exp.run(1, use_restart=False, num_cores=NCORES, overwrite_data=True)
-    exp.run(2, num_cores=NCORES)

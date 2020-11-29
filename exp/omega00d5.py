@@ -42,10 +42,10 @@ diag.add_field('dynamics', 'ps', time_avg=True)
 diag.add_field('dynamics', 'bk')
 diag.add_field('dynamics', 'pk')
 diag.add_field('dynamics', 'vor', time_avg=True)
+diag.add_field('dynamics', 'div', time_avg=True)
+diag.add_field('dynamics', 'ucomp', time_avg=True)
 diag.add_field('dynamics', 'vcomp', time_avg=True)
 diag.add_field('dynamics', 'temp', time_avg=True)
-diag.add_field('mixed_layer', 't_surf', time_avg=True)
-diag.add_field('atmosphere', 'precipitation', time_avg=True)
 
 exp.diag_table = diag
 
@@ -63,10 +63,10 @@ exp.update_namelist({
 })
 
 #Define Restart File
-spinup_fin = os.path.join(GFDL_DATA,'spinup/restarts/res0002.tar.gz')
+spinup_fin = os.path.join(GFDL_DATA,'spinup/restarts/res0001.tar.gz')
 
 #Lets do a run!
 if __name__=="__main__":
     exp.run(1, use_restart=True, restart_file=spinup_fin, num_cores=NCORES)
-    for i in range(2,12):
+    for i in range(2,7):
         exp.run(i, num_cores=NCORES)
