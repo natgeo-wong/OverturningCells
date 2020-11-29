@@ -3,6 +3,7 @@ using Dates
 using JLD2
 using IscaTools
 using Logging
+using Statistics
 
 function zmeantair(
     prjpath::AbstractString,
@@ -22,12 +23,12 @@ function zmeantair(
     for irun = 1 : nruns
         @info "$(Dates.now()) - Extracting AIR TEMPERATURE data for RUN $irun of CONFIG $(uppercase(config)) ..."
         ids,ivar = iscarawread(ipar,iroot,irun=irun+1);
-        tair += dropdims(mean(ivar[:,:,:]*1,dims=1),dims=1)
+        tair += dropdims(mean(ivar[:]*1,dims=1),dims=1)
         close(ids)
     end
 
     tair = dropdims(mean(tair/nruns,dims=3),dims=3)
-    tair = (tair .+ reverse(seas,dims=1))/2
+    tair = (tair .+ reverse(tair,dims=1))/2
 
     @info "$(Dates.now()) - Saving compiled zonal-mean AIR TEMPERATURE data for CONFIG $(uppercase(config))..."
     dpath = datadir("compiled/zmean-tair-all/"); if !isdir(dpath); mkpath(dpath); end
@@ -59,7 +60,7 @@ function zmeanpsiv500(
     end
 
     psiv = psiv / nruns
-    psiv = (psiv .- reverse(seas,dims=1))/2
+    psiv = (psiv .- reverse(psiv,dims=1))/2
 
     @info "$(Dates.now()) - Saving compiled zonal-mean MERIDIONAL STREAMFUNCTION data at 500 hPa for CONFIG $(uppercase(config))..."
     dpath = datadir("compiled/zmean-psiv-500hPa/"); if !isdir(dpath); mkpath(dpath); end
@@ -86,12 +87,12 @@ function zmeanpsivall(
     for irun = 1 : nruns
         @info "$(Dates.now()) - Extracting MERIDIONAL STREAMFUNCTION data at ALL PRESSURE LEVELS for RUN $irun of CONFIG $(uppercase(config)) ..."
         ids,ivar = iscacalcread(ipar,iroot,irun=irun+1);
-        psiv += ivar[:,:,:]*1
+        psiv += ivar[:]*1
         close(ids)
     end
 
     psiv = dropdims(mean(psiv/nruns,dims=3),dims=3)
-    psiv = (psiv .- reverse(seas,dims=1))/2
+    psiv = (psiv .- reverse(psiv,dims=1))/2
 
     @info "$(Dates.now()) - Saving compiled zonal-mean MERIDIONAL STREAMFUNCTION data at ALL PRESSURE LEVELS for CONFIG $(uppercase(config))..."
     dpath = datadir("compiled/zmean-psiv-all/"); if !isdir(dpath); mkpath(dpath); end
