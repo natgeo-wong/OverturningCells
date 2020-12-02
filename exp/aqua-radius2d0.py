@@ -29,10 +29,10 @@ for oscale in np.arange(-2,1.1,0.2):
     rfol = 'radius'   + '{:03.1f}'.format(rscale)
     ofol = 'omegalog' + '{:03.1f}'.format(oscale)
     exp = Experiment(os.path.join('aqua',rfol+'-'+ofol), codebase=cb)
-    exp.set_resolution(*RESOLUTION)
     exp.clear_rundir()
     exp.diag_table = diag
     exp.namelist   = f90nml.read('namelistaqua.nml')
+    exp.set_resolution(*RESOLUTION)
     exp.update_namelist({
         'constants_nml': {
             'radius' : earth_radius * rscale,

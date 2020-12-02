@@ -14,6 +14,7 @@
 &spectral_dynamics_nml
     damping_order             = 4
     water_correction_limit    = 200e2
+    do_water_correction       = .false.
     reference_sea_level_press = 1.0e5
     valid_range_t             = 100,800
     initial_sphum             = 0.0
@@ -22,6 +23,11 @@
     scale_heights             = 5.0             ! Default 9.0 for MiMA, 5.0 for Tapio FMS
     exponent                  = 2.0             ! Default 7.0 for MiMA, 2.0 for Tapio FMS
     robert_coeff              = 0.03
+/
+
+&dry_convection_nml
+    tau   = 21600.
+    gamma = 1.0
 /
 
 &idealized_moist_phys_nml

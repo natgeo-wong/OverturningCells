@@ -22,9 +22,9 @@ diag.add_field('dynamics', 'vcomp', time_avg=True)
 diag.add_field('dynamics', 'temp', time_avg=True)
 
 exp = Experiment('drycore/spinup', codebase=cb)
-exp.set_resolution(*RESOLUTION)
 exp.clear_rundir()
 exp.diag_table = diag
 exp.namelist   = f90nml.read('namelistdryc.nml')
+exp.set_resolution(*RESOLUTION)
 
 exp.run(1, num_cores=NCORES, use_restart=False, overwrite_data=True)
