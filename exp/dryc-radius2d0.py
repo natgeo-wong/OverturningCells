@@ -33,7 +33,7 @@ for oscale in np.arange(-2,1.1,0.2):
     exp.set_resolution(*RESOLUTION)
     exp.update_namelist({
         'constants_nml': {
-            'radius' : earth_radius * rfactor,
+            'radius' : earth_radius * rscale,
             'omega'  : earth_omega  * (10 ** oscale)
         }
     })
