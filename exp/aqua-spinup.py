@@ -13,12 +13,10 @@ earth_omega  = 7.292e-5
 earth_radius = 6376.0e3
 
 diag = DiagTable()
-diag.add_file('atmos_daily', 1, 'days', time_units='days')
+diag.add_file('atmos_monthly', 30, 'days', time_units='days')
 diag.add_field('dynamics', 'ps', time_avg=True)
 diag.add_field('dynamics', 'bk')
 diag.add_field('dynamics', 'pk')
-diag.add_field('dynamics', 'vor', time_avg=True)
-diag.add_field('dynamics', 'div', time_avg=True)
 diag.add_field('dynamics', 'ucomp', time_avg=True)
 diag.add_field('dynamics', 'vcomp', time_avg=True)
 diag.add_field('dynamics', 'temp', time_avg=True)
