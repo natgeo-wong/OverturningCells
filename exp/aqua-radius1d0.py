@@ -14,15 +14,13 @@ earth_radius = 6376.0e3
 rscale = 1
 
 diag = DiagTable()
-diag.add_file('atmos_monthly', 30, 'days', time_units='days')
+diag.add_file('atmos_monthly', 50, 'days', time_units='days')
 diag.add_field('dynamics', 'ps', time_avg=True)
 diag.add_field('dynamics', 'bk')
 diag.add_field('dynamics', 'pk')
 diag.add_field('dynamics', 'ucomp', time_avg=True)
 diag.add_field('dynamics', 'vcomp', time_avg=True)
 diag.add_field('dynamics', 'temp', time_avg=True)
-
-spinup_fin = os.path.join(GFDL_DATA,'aqua/spinup/restarts/res0001.tar.gz')
 
 for oscale in np.arange(-2,1.1,0.2):
 
@@ -41,6 +39,6 @@ for oscale in np.arange(-2,1.1,0.2):
     })
 
     if __name__=="__main__":
-        exp.run(1, use_restart=True, restart_file=spinup_fin, num_cores=NCORES)
-        for i in range(2,4):
+        exp.run(1, use_restart=False, num_cores=NCORES)
+        for i in range(2,12):
             exp.run(i, num_cores=NCORES)

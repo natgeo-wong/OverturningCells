@@ -1,5 +1,5 @@
 &main_nml
-    days     = 360
+    days     = 50
     hours    = 0
     minutes  = 0
     seconds  = 0
