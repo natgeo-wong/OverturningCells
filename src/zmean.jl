@@ -13,12 +13,12 @@ function zmeantair(
     @info "$(Dates.now()) - Beginning compilation of zonal-mean AIR TEMPERATURE data for CONFIG $(uppercase(config))..."
     init,iroot = iscastartup(
         prjpath=prjpath,config=config,
-        fname="atmos_daily",welcome=false
+        fname="atmos_monthly",welcome=false
     ); lat = init["lat"];
 
     imod,ipar,itime = iscainitialize(init,modID="dpre",parID="temp");
     nruns = itime["nruns"]-1; nlat = length(imod["lat"]); nlvls = length(imod["levels"]);
-    tair = zeros(nlat,nlvls,360);
+    tair = zeros(nlat,nlvls,1);
 
     for irun = 1 : nruns
         @info "$(Dates.now()) - Extracting AIR TEMPERATURE data for RUN $irun of CONFIG $(uppercase(config)) ..."
@@ -45,11 +45,11 @@ function zmeanpsiv500(
     @info "$(Dates.now()) - Beginning compilation of zonal-mean MERIDIONAL STREAMFUNCTION data at 500 hPa for CONFIG $(uppercase(config))..."
     init,iroot = iscastartup(
         prjpath=prjpath,config=config,
-        fname="atmos_daily",welcome=false
+        fname="atmos_monthly",welcome=false
     );  lat = init["lat"];
 
     imod,ipar,itime = iscainitialize(init,modID="cpre",parID="psi_v",pressure=500e2);
-    nruns = itime["nruns"]-1; nlat = length(imod["lat"]); psiv = zeros(nlat,360);
+    nruns = itime["nruns"]-1; nlat = length(imod["lat"]); psiv = zeros(nlat,1);
     lvl = ipar["level"]
 
     for irun = 1 : nruns
@@ -77,12 +77,12 @@ function zmeanpsivall(
     @info "$(Dates.now()) - Beginning compilation of zonal-mean MERIDIONAL STREAMFUNCTION data at ALL PRESSURE LEVELS for CONFIG $(uppercase(config))..."
     init,iroot = iscastartup(
         prjpath=prjpath,config=config,
-        fname="atmos_daily",welcome=false
+        fname="atmos_monthly",welcome=false
     );  lat = init["lat"];
 
     imod,ipar,itime = iscainitialize(init,modID="cpre",parID="psi_v");
     nruns = itime["nruns"]-1; nlat = length(imod["lat"]); nlvls = length(imod["levels"]);
-    psiv = zeros(nlat,nlvls,360);
+    psiv = zeros(nlat,nlvls,1);
 
     for irun = 1 : nruns
         @info "$(Dates.now()) - Extracting MERIDIONAL STREAMFUNCTION data at ALL PRESSURE LEVELS for RUN $irun of CONFIG $(uppercase(config)) ..."
@@ -109,12 +109,12 @@ function zmeanucomp(
     @info "$(Dates.now()) - Beginning compilation of zonal-mean ZONAL WIND data at ALL PRESSURE LEVELS for CONFIG $(uppercase(config))..."
     init,iroot = iscastartup(
         prjpath=prjpath,config=config,
-        fname="atmos_daily",welcome=false
+        fname="atmos_monthly",welcome=false
     );  lat = init["lat"];
 
     imod,ipar,itime = iscainitialize(init,modID="dpre",parID="ucomp");
     nruns = itime["nruns"]-1; nlat = length(imod["lat"]); nlvls = length(imod["levels"]);
-    u_air = zeros(nlat,nlvls,360);
+    u_air = zeros(nlat,nlvls,1);
 
     for irun = 1 : nruns
         @info "$(Dates.now()) - Extracting ZONAL WIND data for RUN $irun of CONFIG $(uppercase(config)) ..."
